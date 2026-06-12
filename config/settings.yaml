@@ -1,0 +1,44 @@
+# =============================================================================
+# AJUSTES OPERATIVOS
+# =============================================================================
+
+timezone: "America/Argentina/Buenos_Aires"
+
+dashboard:
+  repo_url: "https://github.com/jeronimofellner-maker/finance-lab"
+  # Solo-% por privacidad: NO publicar valores absolutos (USD/ARS) ni cantidades.
+  show_absolute_values: false
+
+daily_brief:
+  hour: "07:30"          # hora ART (informativo; el schedule real está en GitHub Actions, en UTC)
+  weekdays_only: true
+  sections:              # orden de aparición en el mail
+    - macro_global
+    - macro_argentina
+    - portfolio_movers
+    - coverage_movers
+    - econ_calendar
+
+intraday_alerts:
+  move_threshold_pct: 5.0      # ±5% intradiario
+  window_start: "11:00"        # ART
+  window_end: "17:30"          # ART
+  weekdays_only: true
+  earnings_lookahead_days: 3   # avisar earnings dentro de N días
+  triggers:
+    - move
+    - earnings
+    - ma
+    - rating
+    - regulatory
+
+notes:
+  cadence: "biweekly"
+  day: "sunday"
+  language: "es"
+  formats: ["substack_long", "linkedin_short"]
+
+mail:
+  subject_prefix_brief: "[Finance Lab] Brief diario"
+  subject_prefix_alert: "[Finance Lab] ALERTA"
+  dedupe_window_hours: 24      # no repetir la misma alerta dentro de esta ventana

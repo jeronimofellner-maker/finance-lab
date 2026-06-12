@@ -1,0 +1,63 @@
+# =============================================================================
+# UNIVERSO DE COBERTURA — research formal. 6 nombres (pocos y bien).
+# Cada uno alimenta: alertas de earnings/M&A/rating/regulatorio + notas quincenales.
+#   us_ticker:   símbolo para yfinance / SEC EDGAR (si lista en US)
+#   byma_ticker: símbolo local si también cotiza en BYMA (para precio en ARS)
+#   stance:      long | hold | short | watch
+#   target_price / horizon: para medir tu track record cuando publiques la nota
+# =============================================================================
+
+names:
+  - name: YPF
+    us_ticker: YPF
+    byma_ticker: YPFD
+    sector: Energía
+    stance: watch
+    thesis: "Vaca Muerta + desregulación energética; ejecución y deuda son el riesgo."
+    target_price: null
+    horizon: null
+
+  - name: Vista Energy
+    us_ticker: VIST
+    byma_ticker: VIST
+    sector: Energía
+    stance: watch
+    thesis: "Pure-play shale AR de bajo costo; crecimiento de producción agresivo."
+    target_price: null
+    horizon: null
+
+  - name: Pampa Energía
+    us_ticker: PAM
+    byma_ticker: PAMP
+    sector: Energía / Utilities
+    stance: watch
+    thesis: "Integrada energía AR; generación + upstream + Vaca Muerta vía socios."
+    target_price: null
+    horizon: null
+
+  - name: Grupo Galicia
+    us_ticker: GGAL
+    byma_ticker: GGAL
+    sector: Bancos
+    stance: watch
+    thesis: "Banco líder; palanca a normalización macro y crédito en pesos reales."
+    target_price: null
+    horizon: null
+
+  - name: MercadoLibre
+    us_ticker: MELI
+    byma_ticker: MELI
+    sector: Tech LATAM
+    stance: watch
+    thesis: "Compounder e-commerce + fintech (Mercado Pago); margen en expansión."
+    target_price: null
+    horizon: null
+
+  - name: Globant
+    us_ticker: GLOB
+    byma_ticker: GLOB
+    sector: Tech / IT Services
+    stance: watch
+    thesis: "IT services con exposición a demanda de IA; sensible a budgets tech US."
+    target_price: null
+    horizon: null

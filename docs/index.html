@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Finance Lab · Jero Fellner</title>
+<style>
+:root{
+  --bg:#0b0e14; --card:#151a23; --line:#222a36; --txt:#e6edf3; --muted:#8b95a5;
+  --green:#3fb950; --red:#f85149; --accent:#58a6ff; --chip:#1c2330;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased;padding:0 0 48px}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header{padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:24px}
+h1{font-size:20px;font-weight:650;letter-spacing:-.2px}
+.sub{color:var(--muted);font-size:12.5px;margin-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:var(--chip);border:1px solid var(--line);border-radius:8px;
+  padding:8px 12px;min-width:96px}
+.chip .k{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+.chip .v{font-size:17px;font-weight:650;margin-top:2px}
+section{margin:30px 0}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);
+  margin-bottom:14px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;
+  letter-spacing:.4px;padding:0 0 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.t-ticker{font-weight:600}.t-sec{color:var(--muted);font-size:11.5px}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--green)}.neg{color:var(--red)}.mut{color:var(--muted)}
+.tag{font-size:9.5px;color:var(--muted);border:1px solid var(--line);border-radius:4px;
+  padding:1px 4px;margin-left:5px;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gridM{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.mcard .k{color:var(--muted);font-size:11px}
+.mcard .v{font-size:19px;font-weight:650;margin:3px 0 6px}
+.news a{color:var(--accent);text-decoration:none}.news a:hover{text-decoration:underline}
+.news li{list-style:none;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.news li:last-child{border-bottom:none}.news .src{color:var(--muted);font-size:11px}
+.ag li{list-style:none;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;
+  display:flex;gap:10px;align-items:baseline}
+.ag li:last-child{border-bottom:none}.ag .d{color:var(--muted);font-size:11px;min-width:74px}
+.cc{color:var(--accent);font-size:11px;min-width:34px}
+a.note{color:var(--accent);text-decoration:none;font-size:11.5px}
+footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:11px}
+.canvasbox{position:relative;height:170px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}h1{font-size:18px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head><body><div class="wrap">
+
+<header>
+  <h1>Finance Lab</h1>
+  <div class="sub">Research &amp; gestión de cartera · Jero Fellner · actualizado 2026-06-12 09:43 ART</div>
+  <div class="chips">
+    <div class="chip"><div class="k">P&amp;L día</div><div class="v"><span class="pos">+3.0%</span></div></div>
+    <div class="chip"><div class="k">P&amp;L total</div><div class="v"><span class="pos">+4.9%</span></div></div>
+    <div class="chip"><div class="k">Dólar MEP</div><div class="v">$1,449</div></div>
+    <div class="chip"><div class="k">Riesgo país</div><div class="v">503</div></div>
+    
+  </div>
+</header>
+
+<section><h2>Cartera</h2><div class="card"><table><tr><th>Posición</th><th class="num">Peso</th><th class="num">Día</th><th class="num">P&L</th><th class="num">30d (USD)</th></tr><tr><td><span class="t-ticker">NU</span><br><span class="t-sec">Fintech (Brasil / LATAM)</span></td><td class="num">80.5%</td><td class="num"><span class="pos">+2.7%</span></td><td class="num"><span class="pos">+0.1%</span></td><td class="num"><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="1.0,1.0 6.1,7.5 11.3,5.9 16.4,16.5 21.6,15.1 26.7,15.1 31.9,7.9 37.0,2.6 42.1,8.8 47.3,5.2 52.4,4.4 57.6,4.2 62.7,3.0 67.9,5.0 73.0,20.3 78.1,24.4 83.3,17.5 88.4,19.7 93.6,25.0 98.7,21.0 103.9,24.7 109.0,18.0"/></svg></td></tr><tr><td><span class="t-ticker">CEPU</span><br><span class="t-sec">Energía / Generación</span></td><td class="num">13.0%</td><td class="num"><span class="pos">+4.8%</span></td><td class="num"><span class="pos">+43.8%</span><span class="tag">en ARS</span></td><td class="num"><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="1.5" points="1.0,19.8 6.1,20.4 11.3,19.3 16.4,25.0 21.6,18.9 26.7,23.4 31.9,22.8 37.0,17.4 42.1,23.3 47.3,17.5 52.4,7.6 57.6,9.7 62.7,3.8 67.9,1.0 73.0,3.8 78.1,11.0 83.3,11.9 88.4,15.5 93.6,16.2 98.7,13.6 103.9,10.7 109.0,1.5"/></svg></td></tr><tr><td><span class="t-ticker">GLD</span><br><span class="t-sec">Oro / Commodities (ETF)</span></td><td class="num">4.5%</td><td class="num"><span class="pos">+2.0%</span></td><td class="num"><span class="neg">-0.4%</span></td><td class="num"><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="1.0,1.0 6.1,2.0 11.3,3.4 16.4,7.4 21.6,7.0 26.7,9.8 31.9,7.4 37.0,7.6 42.1,8.9 47.3,8.8 52.4,11.1 57.6,9.3 62.7,7.5 67.9,9.9 73.0,9.6 78.1,11.3 83.3,9.9 88.4,16.1 93.6,15.7 98.7,18.3 103.9,25.0 109.0,20.2"/></svg></td></tr><tr><td><span class="t-ticker">BBD</span><br><span class="t-sec">Bancos (Brasil)</span></td><td class="num">2.0%</td><td class="num"><span class="pos">+3.0%</span></td><td class="num"><span class="pos">+47.1%</span><span class="tag">en ARS</span></td><td class="num"><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="1.0,1.0 6.1,10.4 11.3,6.4 16.4,13.1 21.6,10.4 26.7,15.8 31.9,6.4 37.0,7.1 42.1,13.1 47.3,8.4 52.4,7.1 57.6,9.8 62.7,11.8 67.9,13.1 73.0,10.4 78.1,18.9 83.3,18.3 88.4,20.3 93.6,25.0 98.7,22.3 103.9,24.3 109.0,14.9"/></svg></td></tr></table></div></section>
+
+<section><h2>Asignación · actual vs target</h2>
+  <div class="grid2">
+    <div class="card"><div style="font-size:12px;color:var(--muted);margin-bottom:8px">Actual</div>
+      <div class="canvasbox"><canvas id="cActual"></canvas></div></div>
+    <div class="card"><div style="font-size:12px;color:var(--muted);margin-bottom:8px">Target</div>
+      <div class="canvasbox"><canvas id="cTarget"></canvas></div></div>
+  </div>
+</section>
+
+<section><h2>Cobertura</h2><div class="card"><table><tr><th>Nombre</th><th class="num">Día</th><th class="num">Nota</th></tr><tr><td>YPF <span class="t-sec">(YPF)</span></td><td class="num"><span class="pos">+0.6%</span></td><td class="num"><span class="mut">—</span></td></tr><tr><td>Vista Energy <span class="t-sec">(VIST)</span></td><td class="num"><span class="neg">-0.3%</span></td><td class="num"><span class="mut">—</span></td></tr><tr><td>Pampa Energía <span class="t-sec">(PAM)</span></td><td class="num"><span class="pos">+5.7%</span></td><td class="num"><span class="mut">—</span></td></tr><tr><td>Grupo Galicia <span class="t-sec">(GGAL)</span></td><td class="num"><span class="pos">+0.9%</span></td><td class="num"><span class="mut">—</span></td></tr><tr><td>MercadoLibre <span class="t-sec">(MELI)</span></td><td class="num"><span class="neg">-0.2%</span></td><td class="num"><span class="mut">—</span></td></tr><tr><td>Globant <span class="t-sec">(GLOB)</span></td><td class="num"><span class="neg">-0.2%</span></td><td class="num"><span class="mut">—</span></td></tr></table></div></section>
+
+<section><h2>Macro Argentina · valor + tendencia 30d</h2><div class="gridM"><div class="card mcard"><div class="k">Dólar MEP</div><div class="v">$1,449</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="1.5" points="1.0,25.0 4.7,20.9 8.4,21.8 12.2,21.8 15.9,21.8 19.6,17.1 23.3,20.4 27.1,17.7 30.8,22.5 34.5,19.2 38.2,19.2 42.0,19.2 45.7,19.2 49.4,18.4 53.1,21.0 56.9,20.1 60.6,19.0 64.3,19.0 68.0,19.0 71.8,14.4 75.5,10.2 79.2,3.9 82.9,6.0 86.7,4.3 90.4,4.3 94.1,4.3 97.8,1.0 101.6,4.7 105.3,5.4 109.0,8.2"/></svg></div><div class="card mcard"><div class="k">Dólar CCL</div><div class="v">$1,493</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="1.5" points="1.0,23.2 4.7,25.0 8.4,21.0 12.2,21.0 15.9,21.0 19.6,21.2 23.3,18.0 27.1,18.9 30.8,24.9 34.5,20.2 38.2,20.2 42.0,20.2 45.7,20.2 49.4,20.0 53.1,21.2 56.9,22.3 60.6,21.7 64.3,21.7 68.0,21.7 71.8,17.0 75.5,11.0 79.2,3.6 82.9,6.4 86.7,6.5 90.4,6.5 94.1,6.5 97.8,1.0 101.6,4.6 105.3,7.0 109.0,15.4"/></svg></div><div class="card mcard"><div class="k">Riesgo país</div><div class="v">503 pb</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="1.0,1.0 4.7,9.3 8.4,3.7 12.2,4.9 15.9,16.7 19.6,14.3 23.3,17.9 27.1,22.0 30.8,17.6 34.5,14.0 38.2,13.4 42.0,9.6 45.7,8.1 49.4,6.9 53.1,13.7 56.9,16.1 60.6,16.7 64.3,16.7 68.0,18.5 71.8,20.9 75.5,22.6 79.2,22.9 82.9,23.8 86.7,24.4 90.4,23.2 94.1,25.0 97.8,21.1 101.6,22.6 105.3,21.4 109.0,20.0"/></svg></div><div class="card mcard"><div class="k">Reservas BCRA</div><div class="v">US$47,834M</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="1.5" points="1.0,15.4 4.7,17.0 8.4,20.8 12.2,25.0 15.9,18.0 19.6,16.5 23.3,17.9 27.1,16.2 30.8,15.5 34.5,15.0 38.2,14.8 42.0,12.6 45.7,14.7 49.4,15.5 53.1,15.1 56.9,14.7 60.6,12.3 64.3,11.3 68.0,11.0 71.8,4.2 75.5,4.4 79.2,2.9 82.9,2.5 86.7,1.4 90.4,1.0 94.1,1.1 97.8,1.4 101.6,4.5 105.3,4.9 109.0,4.7"/></svg></div><div class="card mcard"><div class="k">Tasa TAMAR</div><div class="v">21.6%</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="1.0,11.1 4.7,11.1 8.4,4.9 12.2,4.9 15.9,1.0 19.6,9.5 23.3,8.7 27.1,11.8 30.8,9.5 34.5,11.1 38.2,12.6 42.0,8.7 45.7,8.7 49.4,8.7 53.1,7.2 56.9,9.5 60.6,7.2 64.3,7.2 68.0,8.7 71.8,8.7 75.5,6.4 79.2,15.7 82.9,7.2 86.7,9.5 90.4,17.3 94.1,15.7 97.8,21.1 101.6,23.5 105.3,25.0 109.0,24.2"/></svg></div><div class="card mcard"><div class="k">Inflación m/m</div><div class="v">2.1%</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="1.5" points="1.0,25.0 10.8,21.0 20.6,21.0 30.5,18.3 40.3,15.7 50.1,13.0 59.9,9.0 69.7,7.7 79.5,7.7 89.4,1.0 99.2,11.7 109.0,18.3"/></svg></div><div class="card mcard"><div class="k">Inflación i.a.</div><div class="v">33.2%</div><svg width="110" height="26" viewBox="0 0 110 26" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="1.0,1.0 10.8,9.3 20.6,18.2 30.5,23.5 40.3,25.0 50.1,24.7 59.9,24.4 69.7,21.7 79.5,19.7 89.4,21.1 99.2,21.7 109.0,19.4"/></svg></div></div></section>
+
+<section><h2>Noticias del día</h2><div class="card"><ul class="news"><li><a href="https://www.ambito.com/finanzas/dolar-hoy-y-dolar-blue-hoy-minuto-minuto-cuanto-opera-este-viernes-12-junio-n6288017">Dólar hoy y dólar blue hoy minuto a minuto: a cuánto opera este viernes 12 de junio</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/el-dolar-mayorista-se-encamina-su-primera-baja-semanal-casi-un-mes-n6288033">El dólar mayorista se encamina a su primera baja semanal en casi un mes</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/el-bcra-flexibiliza-las-restricciones-otorgar-credito-dolares-empresas-no-exportadoras-n6288022">El BCRA flexibiliza las restricciones para otorgar crédito en dólares a empresas no exportadoras</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/wall-street-extiende-las-subas-la-salida-bolsa-spacex-y-el-petroleo-toca-su-nivel-mas-tres-meses-n6288023">Wall Street extiende las subas ante la salida a bolsa de SpaceX y el petróleo toca su nivel más bajo en tres meses</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/historico-debut-spacex-wall-street-la-apuesta-mas-ambiciosa-elon-musk-que-mezcla-cohetes-satelites-ia-y-una-valuacion-record-n6287923">Histórico debut de SpaceX en Wall Street: la apuesta más ambiciosa de Elon Musk que mezcla cohetes, satélites, IA y una valuación récord</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/dolar-hoy-cuanto-cotiza-este-viernes-12-junio-n6288002">Dólar hoy: a cuánto cotiza este viernes 12 de junio</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/dolar-blue-hoy-cuanto-opera-este-viernes-12-junio-n6288003">Dólar blue hoy: a cuánto opera este viernes 12 de junio</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/real-blue-cuanto-opera-este-viernes-12-junio-n6287917">Real blue: a cuánto opera este viernes 12 de junio</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/cambio-tendencia-bitcoin-rebota-y-busca-recuperar-los-us63000-n6287605">Bitcoin rebota 4%, borra la caída semanal y supera los u$s63.000</a> <span class="src">· Ámbito Financiero</span></li><li><a href="https://www.ambito.com/finanzas/dolar-hoy-y-dolar-blue-hoy-minuto-minuto-cuanto-opera-este-jueves-11-junio-n6287559">Dólar hoy y dólar blue hoy minuto a minuto: a cuánto opera este jueves 11 de junio</a> <span class="src">· Ámbito Financiero</span></li></ul></div></section>
+
+<section><h2>Agenda económica · próximos 7 días</h2><div class="card"><ul class="ag"><li><span class="d">2026-06-12 02:00</span><span class="cc">GBP</span><span>GDP m/m</span></li></ul></div></section>
+
+<footer>
+  Generado automáticamente por Finance Lab. Datos: data912, BCRA, argentinadatos,
+  yfinance, SEC EDGAR, RSS. No es asesoramiento financiero.
+</footer>
+</div>
+
+<script>
+const DON = {"actual": {"labels": ["cedear", "accion_ar"], "data": [87.0, 13.0], "colors": ["#58a6ff", "#3fb950"]}, "target": {"labels": ["cedear", "us_equity", "accion_ar", "bono_ar", "ons", "cash", "plazo_fijo"], "data": [30.0, 20.0, 15.0, 15.0, 10.0, 5.0, 5.0], "colors": ["#58a6ff", "#bc8cff", "#3fb950", "#f0883e", "#e3b341", "#8b95a5", "#6e7681"]}};
+const opts = (t)=>({type:'doughnut',data:{labels:t.labels,
+  datasets:[{data:t.data,backgroundColor:t.colors,borderColor:'#0b0e14',borderWidth:2}]},
+  options:{cutout:'62%',plugins:{legend:{position:'bottom',
+    labels:{color:'#8b95a5',font:{size:11},boxWidth:10,padding:8}}}}});
+new Chart(document.getElementById('cActual'), opts(DON.actual));
+new Chart(document.getElementById('cTarget'), opts(DON.target));
+</script>
+</body></html>

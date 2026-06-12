@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.finlab.alerts</string>
+
+    <!-- IMPORTANTE: reemplazá las rutas /Users/jeronimofellner si cambia tu usuario -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
+        <string>/Users/jeronimofellner/finance-lab/scripts/intraday_alerts.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/jeronimofellner/finance-lab</string>
+
+    <!-- Corre cada 20 minutos. El script filtra por ventana 11:00-17:30 ART, lun-vie. -->
+    <key>StartInterval</key>
+    <integer>1200</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Users/jeronimofellner/finance-lab/logs/alerts.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/jeronimofellner/finance-lab/logs/alerts.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

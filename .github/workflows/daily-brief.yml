@@ -1,0 +1,67 @@
+name: Daily Brief
+
+on:
+  schedule:
+    # 07:30 ART = 10:30 UTC. GitHub Actions usa SIEMPRE UTC.
+    # Lun-Vie. Nota: el scheduler de Actions puede demorar algunos minutos.
+    - cron: "30 10 * * 1-5"
+  workflow_dispatch: {}   # permite dispararlo a mano desde la pestaña Actions
+
+# Necesario para que el job pueda commitear docs/ de vuelta al repo.
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: python -m pip install -r requirements.txt
+
+      - name: Inyectar cartera real desde secreto (no vive en el repo público)
+        env:
+          PORTFOLIO_YAML: ${{ secrets.PORTFOLIO_YAML }}
+        run: |
+          if [ -n "$PORTFOLIO_YAML" ]; then
+            printf '%s' "$PORTFOLIO_YAML" > config/portfolio.yaml
+            echo "Cartera inyectada desde secreto."
+          else
+            cp config/portfolio.example.yaml config/portfolio.yaml
+            echo "::warning::Sin secreto PORTFOLIO_YAML; usando la plantilla de ejemplo."
+          fi
+
+      - name: Enviar brief diario
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python scripts/daily_brief.py
+
+      - name: Generar dashboard (docs/index.html)
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python scripts/build_dashboard.py
+
+      - name: Commit y push del dashboard si cambió
+        run: |
+          git config user.name  "finance-lab-bot"
+          git config user.email "actions@github.com"
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "Sin cambios en el dashboard."
+          else
+            git commit -m "Dashboard: actualización automática [skip ci]"
+            git push
+          fi

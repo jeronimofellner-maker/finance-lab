@@ -1,0 +1,31 @@
+# Secretos — NUNCA versionar
+.env
+*.app_password
+
+# Cartera REAL (cantidades/PPC) — privada. Solo se versiona portfolio.example.yaml.
+config/portfolio.yaml
+
+# Cache de datos (se regenera) — NADA bajo data/ va al repo salvo los .gitkeep.
+# Patrón a prueba de balas para repo público: ignora todo el subárbol, re-incluye
+# solo los directorios y los .gitkeep para preservar la estructura.
+data/**
+!data/**/
+!data/**/.gitkeep
+
+# Logs
+logs/*.log
+logs/*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Claude Code (config local)
+.claude/settings.local.json

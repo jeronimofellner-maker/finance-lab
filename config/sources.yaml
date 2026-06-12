@@ -1,0 +1,48 @@
+# =============================================================================
+# FUENTES DE DATOS Y NOTICIAS (todo free-tier)
+# Las limitaciones de calidad están documentadas en el README (sección Fuentes).
+# =============================================================================
+
+# --- APIs de mercado ---
+apis:
+  data912_base: "https://data912.com/live"   # BYMA: arg_stocks, arg_cedears, arg_bonds, arg_corp, mep
+  bcra_monetarias: "https://api.bcra.gob.ar/estadisticas/v4.0/monetarias"
+  sec_tickers: "https://www.sec.gov/files/company_tickers.json"
+  sec_submissions: "https://data.sec.gov/submissions/CIK{cik}.json"
+  econ_calendar: "https://nfs.faireconomy.media/ff_calendar_thisweek.json"  # ForexFactory semanal
+  riesgo_pais: "https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais"
+  dolar_hist: "https://api.argentinadatos.com/v1/cotizaciones/dolares"   # /{casa}: bolsa=MEP, contadoconliqui=CCL
+
+# --- Variables BCRA a destacar en el brief (match por idVariable exacto) ---
+# IDs de la API v4.0/monetarias. Editá la lista si querés otras series.
+bcra_highlights:
+  - { id: 1,  label: "Reservas internacionales (USD M)" }
+  - { id: 5,  label: "Dólar mayorista (A3500)" }
+  - { id: 44, label: "Tasa TAMAR (referencia)" }       # la 'política monetaria' (160) quedó vieja
+  - { id: 15, label: "Base monetaria (ARS M)" }
+  - { id: 27, label: "Inflación mensual (%)" }
+  - { id: 28, label: "Inflación interanual (%)" }
+
+# --- RSS de noticias ---
+# global: macro internacional | argentina: macro/mercado local
+rss:
+  global:
+    - { source: "Reuters Business",     url: "https://feeds.reuters.com/reuters/businessNews" }
+    - { source: "Reuters Markets",      url: "https://feeds.reuters.com/reuters/USMarketsNews" }
+    - { source: "CNBC Markets",         url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258" }
+    - { source: "Yahoo Finance",        url: "https://finance.yahoo.com/news/rssindex" }
+    - { source: "Investing.com",        url: "https://www.investing.com/rss/news.rss" }
+  argentina:
+    - { source: "Ámbito Financiero",    url: "https://www.ambito.com/rss/pages/finanzas.xml" }
+    - { source: "Ámbito Economía",      url: "https://www.ambito.com/rss/pages/economia.xml" }
+    - { source: "El Cronista",          url: "https://www.cronista.com/files/rss/finanzas-mercados.xml" }
+    - { source: "Infobae Economía",     url: "https://www.infobae.com/economia/rss/" }
+    - { source: "BAE Negocios",         url: "https://www.baenegocios.com/rss/finanzas.xml" }
+
+# Palabras clave que elevan una noticia a ALERTA (M&A, rating, regulatorio).
+# Tuneadas para bajar falsos positivos (ej: "S&P 500" NO debe disparar 'rating').
+# Esto es best-effort: ajustá la lista a medida que veas ruido en tus alertas.
+alert_keywords:
+  ma:         ["adquisición", "fusión", "merger", "acquisition", "takeover", "oferta hostil", "oferta por la", "compra de la mayoría"]
+  rating:     ["Moody's", "Fitch", "S&P Global", "calificación crediticia", "downgrade", "upgrade", "rebaja la nota", "mejora la nota", "perspectiva crediticia", "default"]
+  regulatory: ["CNV", "BCRA dispone", "BCRA resolvió", "sanción", "SEC charges", "antitrust", "decreto", "resolución general"]

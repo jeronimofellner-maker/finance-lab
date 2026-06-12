@@ -1,0 +1,35 @@
+# =============================================================================
+# PLANTILLA de cartera (PÚBLICA). Tu cartera REAL va en config/portfolio.yaml,
+# que está gitignored y NUNCA se sube. Ver README §2 para el flujo de edición.
+# =============================================================================
+# Regla: cada posición lleva una `tesis` de una línea. Si no la podés escribir,
+# la posición no va.
+#
+# Nota técnica sobre `moneda`: es la moneda del PPC que cargaste.
+#   - El PRECIO de mercado de acciones/CEDEARs sale en ARS (panel BYMA, data912).
+#   - El valor en USD siempre se calcula con MEP (precio ARS / MEP).
+#   - PPC en USD (ej. CEDEARs comprados al CCL) -> P&L en USD real.
+#   - PPC en ARS -> P&L = retorno en pesos (no captura el efecto del dólar).
+#
+# asset_class: cedear | accion_ar | bono_ar | ons | us_equity | plazo_fijo | cash
+#   (la clase de ONs es 'ons', NO 'on' — YAML lee 'on' como booleano)
+# =============================================================================
+
+base_currency: USD   # todo se reporta en USD-MEP; también se muestra ARS
+
+positions:
+  - ticker: GGAL
+    asset_class: accion_ar
+    qty: 50
+    ppc: 6800            # ARS por acción
+    moneda: ARS
+    sector: Bancos
+    tesis: "Ejemplo — reemplazá por tus posiciones reales en config/portfolio.yaml"
+
+  - ticker: AAPL
+    asset_class: cedear
+    qty: 10
+    ppc: 9.5             # USD por CEDEAR (comprado al CCL)
+    moneda: USD
+    sector: Tech
+    tesis: "Ejemplo — reemplazá por tus posiciones reales en config/portfolio.yaml"

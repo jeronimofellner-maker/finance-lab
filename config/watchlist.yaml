@@ -1,0 +1,13 @@
+# =============================================================================
+# WATCHLIST — nombres que seguís SIN tener posición (alertas, no research formal).
+# Completá con 5-8 tickers. Mismo formato de ticker que coverage.
+#   us_ticker / byma_ticker: el que aplique (al menos uno).
+# Las alertas de ±5%, earnings y noticias también corren sobre estos.
+# =============================================================================
+
+names:
+  # - { name: "Telecom Argentina", us_ticker: "TEO",  byma_ticker: "TECO2", note: "Convergencia telco; M&A potencial." }
+  # - { name: "Banco Macro",       us_ticker: "BMA",  byma_ticker: "BMA",   note: "Comparable de GGAL." }
+  # - { name: "Cresud",            us_ticker: "CRESY", byma_ticker: "CRES",  note: "Agro + real estate (IRSA)." }
+  # - { name: "Transportadora Gas Sur", us_ticker: "TGS", byma_ticker: "TGSU2", note: "Infraestructura gas Vaca Muerta." }
+  # - { name: "Nvidia",            us_ticker: "NVDA", byma_ticker: "NVDA",  note: "Termómetro del trade de IA." }
