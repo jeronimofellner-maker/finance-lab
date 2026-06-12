@@ -58,6 +58,10 @@ MEP = AL30/AL30D (fallback GD30/GD30D). Limitaciones de calidad documentadas en 
   El detalle absoluto va solo por mail (privado). Mantener este invariante.
 - Secretos solo en `.env` (local) y GitHub Secrets (CI). El historial de git se
   mantiene sin mail ni credenciales.
+- **`config/portfolio.yaml` (cartera real con qty/ppc) está gitignored — NO va al
+  repo público.** Solo se versiona `portfolio.example.yaml`. En CI la cartera se
+  inyecta desde el secreto `PORTFOLIO_YAML`. Para sincronizar cambios:
+  `gh secret set PORTFOLIO_YAML < config/portfolio.yaml`. Nunca commitear la real.
 
 ## Convenciones de código
 - Todo importa rutas/config desde `finlab.config`. No hardcodear paths.

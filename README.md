@@ -52,28 +52,52 @@ que 2FA esté activo.
 
 ---
 
-## 2. Cargar tu cartera (`config/portfolio.yaml`)
+## 2. Tu cartera y cómo editarla (`config/portfolio.yaml`)
 
-Abrí `config/portfolio.yaml`. Tiene ejemplos comentados. **Borralos** y cargá tus
-posiciones reales. Cada una lleva:
+**El repo es PÚBLICO, así que tu cartera real NO vive en el repo.** `config/portfolio.yaml`
+está gitignored (solo existe en tu máquina). Lo que se versiona es
+`config/portfolio.example.yaml` (plantilla pública, sin tus datos). En la nube, GitHub
+Actions reconstruye tu cartera desde un **secreto** (`PORTFOLIO_YAML`).
 
+**Primera vez:** copiá la plantilla y cargá tus posiciones reales:
+```bash
+cp config/portfolio.example.yaml config/portfolio.yaml   # solo si no existe
+open -e config/portfolio.yaml
+```
+Cada posición:
 ```yaml
-- ticker: GGAL          # símbolo (ver convenciones en el header del archivo)
-  asset_class: accion_ar # cedear | accion_ar | bono_ar | ons | us_equity | plazo_fijo | cash
-  qty: 50
-  ppc: 6800             # precio promedio de compra en `moneda`
-  moneda: ARS
-  sector: Bancos
+- ticker: NU            # símbolo (ver convenciones en el header del archivo)
+  asset_class: cedear    # cedear | accion_ar | bono_ar | ons | us_equity | plazo_fijo | cash
+  qty: 23
+  ppc: 6.22             # precio promedio de compra en `moneda`
+  moneda: USD
+  sector: Fintech
   tesis: "Una línea. Obligatoria. Si no la podés escribir, sacá la posición."
 ```
 
-Validá que toma precios:
+### Flujo cada vez que cambia tu cartera (comprás / vendés / rotás)
 ```bash
+# 1. Editás el archivo local (nunca se sube)
+open -e config/portfolio.yaml
+
+# 2. Previsualizás local: valuación USD-MEP, exposición y rebalanceo
 python3 scripts/weekly_portfolio.py
+#    y el dashboard:
+python3 scripts/build_dashboard.py    # abrí docs/index.html en el navegador
+
+# 3. Sincronizás a la nube (para que el brief por mail y el dashboard público lo tomen)
+gh secret set PORTFOLIO_YAML < config/portfolio.yaml
+
+# 4. (opcional) refrescás el dashboard ya, sin esperar al brief de mañana
+gh workflow run daily-brief.yml
 ```
-Te imprime valuación en USD-MEP, exposición por clase y sugerencias de rebalanceo
-contra `config/targets.yaml`. Si un ticker aparece "sin precio", revisá que el
-símbolo sea el correcto del panel BYMA (no el de US).
+Tus `qty`/`ppc` nunca salen de tu máquina salvo como **secreto cifrado** en GitHub.
+El dashboard público solo muestra porcentajes.
+
+> `targets.yaml`, `coverage.yaml` y `watchlist.yaml` SÍ son públicos y normales:
+> los editás y hacés `git add/commit/push` (no son datos sensibles).
+
+Si un ticker aparece "sin precio", revisá que el símbolo sea el del panel BYMA (no el de US).
 
 ---
 
